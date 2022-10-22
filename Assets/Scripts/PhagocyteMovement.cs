@@ -9,12 +9,13 @@ public class PhagocyteMovement : Agent
     // Start is called before the first frame update
     void Start()
     {
-
+        tag = Constants.PHAGOCYTE_TAG;
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
+        base.Update();
         PhagocyteMoveKeyBoard();
     }
     

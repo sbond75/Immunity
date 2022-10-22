@@ -5,6 +5,7 @@ public class Agent : MonoBehaviour
 {
     float health = 100;
     public float maxHealth = 100;
+    public Vector2 Velocity = Vector2.zero;
 
     public float Health
     {
@@ -22,9 +23,12 @@ public class Agent : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    protected void Update()
     {
-
+        Vector2 position = transform.position;
+        position.x += Velocity.x * Time.deltaTime;
+        position.y += Velocity.y * Time.deltaTime;
+        transform.position = position;
     }
 
     protected void OnTriggerEnter2D(Collider2D collision)

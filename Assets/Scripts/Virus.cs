@@ -7,16 +7,21 @@ public class Virus : Agent
 {
     public float DamagePower = 2;
     public GameObject GotIn;
+    public float velRange = 10.1f;
 
     // Start is called before the first frame update
     void Start()
     {
-        tag = "Virus";
+        tag = Constants.VIRUS_TAG;
+
+        // Give initial random velocity
+        Velocity = new Vector2(Random.Range(-velRange, velRange) * 10, Random.Range(-velRange, velRange) * 10);
     }
 
     // Update is called once per frame
     void Update()
     {
+        base.Update();
         if (GotIn != null)
         {
             // Stay nearby
