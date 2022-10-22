@@ -2,24 +2,26 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhagocyteMovement : Agent
+public class BCellMovement : MonoBehaviour
 {
     public float speed = 5;
+    public float maxHealth = 100;
+    public float currentHealth;
+    private string VIRUS_TAG = "Virus";
 
     // Start is called before the first frame update
     void Start()
     {
-        tag = Constants.PHAGOCYTE_TAG;
+        currentHealth = maxHealth;
     }
 
     // Update is called once per frame
-    protected void Update()
+    void Update()
     {
-        base.Update();
-        PhagocyteMoveKeyBoard();
+        BCellMoveKeyBoard();
     }
-    
-    void PhagocyteMoveKeyBoard()
+
+    void BCellMoveKeyBoard()
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");
@@ -32,18 +34,20 @@ public class PhagocyteMovement : Agent
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(Constants.VIRUS_TAG))
+        if (collision.gameObject.CompareTag(VIRUS_TAG))
         {
-            Damage(10);
+            changeHealth(-10);
         }
     }
 
-    private void Damage(float changeAmount)
+    private void changeHealth(float changeAmount)
     {
-        base.Damage(changeAmount);
-        if (Health <= 0)
+        currentHealth += changeAmount;
+        if (currentHealth <= 0)
         {
             Destroy(gameObject);
         }
     }
+
+
 }

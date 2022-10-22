@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 1265014327515841531}
   m_Layer: 0
   m_Name: phagocyte
-  m_TagString: Untagged
+  m_TagString: Phagocyte
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,4 +114,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98e187a51c2174352a4925a1a8f0e7b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  maxHealth: 100
+  Velocity: {x: 0, y: 0}
   speed: 5

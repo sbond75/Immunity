@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhagocyteMovement : Agent
+public class Phagocyte : Agent
 {
     public float speed = 5;
 
@@ -18,7 +18,7 @@ public class PhagocyteMovement : Agent
         base.Update();
         PhagocyteMoveKeyBoard();
     }
-    
+
     void PhagocyteMoveKeyBoard()
     {
         float h = Input.GetAxis("Horizontal");
