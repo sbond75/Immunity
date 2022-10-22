@@ -1,18 +1,29 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Agent : MonoBehaviour
 {
     float health = 100;
     public float maxHealth = 100;
-    public Vector2 Velocity = Vector2.zero;
+    public Vector2 velocity = Vector2.zero;
     public float mass = 4;
 
     public float Health
     {
+        get {
+            return health;
+        }
+    }
+
+    public Vector2 Velocity
+    {
         get
         {
-            return health;
+            return velocity;
+        }
+        set
+        {
+            velocity = value;
         }
     }
     public void Damage(float damage)
@@ -39,8 +50,8 @@ public class Agent : MonoBehaviour
     protected void Update()
     {
         Vector2 position = transform.position;
-        position.x += Velocity.x * Time.deltaTime;
-        position.y += Velocity.y * Time.deltaTime;
+        position.x += velocity.x * Time.deltaTime;
+        position.y += velocity.y * Time.deltaTime;
         transform.position = position;
     }
 
