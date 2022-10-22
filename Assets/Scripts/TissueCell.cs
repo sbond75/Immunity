@@ -8,6 +8,9 @@ public class TissueCell : Agent
     float spawnVirusWaitingTime = 3; // seconds
     float spawnVirusRandomization = 1; // plus or minus the above
     float spawnVirusRadius = 1;
+    float healthDec = 0.5f; // When infected
+    float spawnCount = 5; // viruses to spawn
+    float spawnCountVariation = 3; // plus or minus the above
 
     // Start is called before the first frame update
     void Start()
@@ -28,8 +31,16 @@ public class TissueCell : Agent
     {
         while (true)
         {
+            // Check for stopping production
+            if (Health < -spawnCount / healthDec + Random.Range(-spawnCountVariation, spawnCountVariation))
+            {
+                // go away
+                Destroy(gameObject);
+                yield return null;
+            }
+
             // Damage to negative amounts
-            Damage(5f * Time.deltaTime);
+            Damage(healthDec);
 
             // Color tint
             gameObject.GetComponent<SpriteRenderer>().color = new Color(1 / -Health, 1 / -Health, 1 / -Health, 1);
@@ -42,6 +53,10 @@ public class TissueCell : Agent
                 // Spawn virus clone
                 GameObject virus2 = Instantiate(dnaInjection.gameObject, new Vector3(Random.Range(-spawnVirusRadius, spawnVirusRadius), Random.Range(-spawnVirusRadius, spawnVirusRadius), 0), transform.rotation);
                 virus2.transform.position = transform.position;
+                var virus2_ = virus2.GetComponent<Virus>();
+                virus2_.creator = gameObject;
+                virus2_.attached = null;
+                virus2_.GotIn = null;
                 virus2.SetActive(true);
 
                 // Sound

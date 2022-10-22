@@ -27,9 +27,12 @@ public class Agent : MonoBehaviour
         GetComponent<Collider2D>().isTrigger = true;
 
         var rb = gameObject.AddComponent<Rigidbody2D>();
-        //rb.simulated = false; // Just for collisions
-        rb.gravityScale = 0;
-        rb.isKinematic = true;
+        if (rb != null) // can be null if cloned object it seems
+        {
+            //rb.simulated = false; // Just for collisions
+            rb.gravityScale = 0;
+            rb.isKinematic = true;
+        }
     }
 
     // Update is called once per frame

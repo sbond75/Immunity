@@ -8,6 +8,7 @@ public class Virus : Agent
     public float DamagePower = 0.2f;
     public GameObject GotIn;
     public float velRange = 10.1f;
+    public GameObject creator;
 
     // Start is called before the first frame update
     void Start()
@@ -20,7 +21,7 @@ public class Virus : Agent
         Velocity = new Vector2(Random.Range(-velRange, velRange) * 10, Random.Range(-velRange, velRange) * 10);
     }
 
-    GameObject attached;
+    public GameObject attached;
 
     // Update is called once per frame
     void Update()
@@ -36,12 +37,12 @@ public class Virus : Agent
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-        if (GotIn == null)
+        if (GotIn == null && !collision.gameObject.CompareTag("Virus"))
         {
             // Have a chance to attach while we collide
-            if (Random.Range(0, 1) < 0.05)
+            if (Random.Range(0, 1) < 0.005 && collision.gameObject != creator)
             {
-                //print("attach");
+                print("attach" +  " " + collision.gameObject + " " + creator);
                 attached = collision.gameObject;
             }
 
