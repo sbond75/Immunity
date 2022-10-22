@@ -2,17 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PhagocyteMovement : MonoBehaviour
+public class PhagocyteMovement : Agent
 {
     public float speed = 5;
-    public float maxHealth = 100;
-    public float currentHealth;
-    private string VIRUS_TAG = "Virus";
 
     // Start is called before the first frame update
     void Start()
     {
-        currentHealth = maxHealth;
+
     }
 
     // Update is called once per frame
@@ -34,16 +31,16 @@ public class PhagocyteMovement : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.gameObject.CompareTag(VIRUS_TAG))
+        if (collision.gameObject.CompareTag(Constants.VIRUS_TAG))
         {
-            changeHealth(-10);
+            Damage(10);
         }
     }
 
-    private void changeHealth(float changeAmount)
+    private void Damage(float changeAmount)
     {
-        currentHealth += changeAmount;
-        if (currentHealth <= 0)
+        base.Damage(changeAmount);
+        if (Health <= 0)
         {
             Destroy(gameObject);
         }

@@ -4,6 +4,8 @@ using System.Collections;
 public class Agent : MonoBehaviour
 {
     float health = 100;
+    public float maxHealth = 100;
+
     public float Health
     {
         get;
