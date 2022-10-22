@@ -1,4 +1,4 @@
-﻿using UnityEngine;
+using UnityEngine;
 using System.Collections;
 
 public class Agent : MonoBehaviour
@@ -6,6 +6,7 @@ public class Agent : MonoBehaviour
     float health = 100;
     public float maxHealth = 100;
     public Vector2 velocity = Vector2.zero;
+    public float mass = 4;
 
     public float Health
     {
@@ -31,9 +32,18 @@ public class Agent : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start()
+    protected void Start()
     {
-        tag = Constants.VIRUS_TAG;
+        tag = Constants.AGENT_TAG;
+        GetComponent<Collider2D>().isTrigger = true;
+
+        var rb = gameObject.AddComponent<Rigidbody2D>();
+        if (rb != null) // can be null if cloned object it seems
+        {
+            //rb.simulated = false; // Just for collisions
+            rb.gravityScale = 0;
+            rb.isKinematic = true;
+        }
     }
 
     // Update is called once per frame
@@ -45,15 +55,16 @@ public class Agent : MonoBehaviour
         transform.position = position;
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(UnityEngine.Collider2D collision)
     {
     }
 
     protected void OnTriggerStay2D(Collider2D collision)
     {
+        //print("push off");
         // Push off collision
         Vector3 betweenUs = transform.position - collision.gameObject.transform.position; // Vector pointing at us. move off by some amount
-        transform.position += betweenUs / 4;
+        transform.position += betweenUs / mass * Time.deltaTime;
     }
 
     protected void OnTriggerExit2D(Collider2D collision)
