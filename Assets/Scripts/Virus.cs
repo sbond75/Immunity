@@ -12,6 +12,7 @@ public class Virus : Agent
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         tag = Constants.VIRUS_TAG;
 
         // Give initial random velocity
@@ -26,7 +27,7 @@ public class Virus : Agent
         {
             // Stay nearby
             Vector3 betweenUs = transform.position - GotIn.transform.position; // Vector pointing at us. move in (opposite) by some amount
-            transform.position -= betweenUs / 4;
+            transform.position -= betweenUs / 2 * Time.deltaTime;
         }
     }
 }

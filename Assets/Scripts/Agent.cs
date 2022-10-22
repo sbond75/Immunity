@@ -9,7 +9,10 @@ public class Agent : MonoBehaviour
 
     public float Health
     {
-        get;
+        get
+        {
+            return health;
+        }
     }
     public void Damage(float damage)
     {
@@ -17,9 +20,15 @@ public class Agent : MonoBehaviour
     }
 
     // Use this for initialization
-    void Start()
+    protected void Start()
     {
-        tag = Constants.VIRUS_TAG;
+        tag = Constants.AGENT_TAG;
+        GetComponent<Collider2D>().isTrigger = true;
+
+        var rb = gameObject.AddComponent<Rigidbody2D>();
+        //rb.simulated = false; // Just for collisions
+        rb.gravityScale = 0;
+        rb.isKinematic = true;
     }
 
     // Update is called once per frame
@@ -31,15 +40,16 @@ public class Agent : MonoBehaviour
         transform.position = position;
     }
 
-    protected void OnTriggerEnter2D(Collider2D collision)
+    protected void OnTriggerEnter2D(UnityEngine.Collider2D collision)
     {
     }
 
     protected void OnTriggerStay2D(Collider2D collision)
     {
+        //print("push off");
         // Push off collision
         Vector3 betweenUs = transform.position - collision.gameObject.transform.position; // Vector pointing at us. move off by some amount
-        transform.position += betweenUs / 4;
+        transform.position += betweenUs / 4 * Time.deltaTime;
     }
 
     protected void OnTriggerExit2D(Collider2D collision)

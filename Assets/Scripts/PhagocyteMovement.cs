@@ -9,6 +9,7 @@ public class PhagocyteMovement : Agent
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         tag = Constants.PHAGOCYTE_TAG;
     }
 
@@ -30,8 +31,9 @@ public class PhagocyteMovement : Agent
         transform.position = position;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
+        base.OnTriggerEnter2D(collision);
         if (collision.gameObject.CompareTag(Constants.VIRUS_TAG))
         {
             Damage(10);

@@ -12,6 +12,7 @@ public class TissueCell : Agent
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         tag = Constants.TISSUE_CELL_TAG;
     }
 
@@ -51,10 +52,12 @@ public class TissueCell : Agent
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        print("test " + Health);
         if (Health > 0 && collision.gameObject.CompareTag(Constants.VIRUS_TAG))
         {
             Virus virus = collision.gameObject.GetComponent<Virus>();
             // A little bit of breaking through cell wall happens or whatever
+            print("dmg " + virus.DamagePower);
             Damage(virus.DamagePower);
 
             if (Health <= 0)
@@ -73,11 +76,12 @@ public class TissueCell : Agent
 
     private void OnTriggerStay2D(Collider2D collision)
     {
-
+        base.OnTriggerStay2D(collision);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
+        base.OnTriggerExit2D(collision);
 
     }
 }
