@@ -6,6 +6,7 @@ public class Agent : MonoBehaviour
     float health = 100;
     public float maxHealth = 100;
     public Vector2 Velocity = Vector2.zero;
+    public float mass = 4;
 
     public float Health
     {
@@ -49,7 +50,7 @@ public class Agent : MonoBehaviour
         //print("push off");
         // Push off collision
         Vector3 betweenUs = transform.position - collision.gameObject.transform.position; // Vector pointing at us. move off by some amount
-        transform.position += betweenUs / 4 * Time.deltaTime;
+        transform.position += betweenUs / mass * Time.deltaTime;
     }
 
     protected void OnTriggerExit2D(Collider2D collision)

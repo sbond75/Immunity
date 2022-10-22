@@ -13,6 +13,7 @@ public class TissueCell : Agent
     void Start()
     {
         base.Start();
+        mass = 20;
         tag = Constants.TISSUE_CELL_TAG;
     }
 
@@ -28,10 +29,10 @@ public class TissueCell : Agent
         while (true)
         {
             // Damage to negative amounts
-            Damage(0.01f * Time.deltaTime);
+            Damage(5f * Time.deltaTime);
 
             // Color tint
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(-Health / 100f, -Health / 100f, 1, 1);
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1 / -Health, 1 / -Health, 1 / -Health, 1);
 
             if (Health < -0.05f) // Let the production warm up after infection basically
             {
@@ -40,6 +41,7 @@ public class TissueCell : Agent
 
                 // Spawn virus clone
                 GameObject virus2 = Instantiate(dnaInjection.gameObject, new Vector3(Random.Range(-spawnVirusRadius, spawnVirusRadius), Random.Range(-spawnVirusRadius, spawnVirusRadius), 0), transform.rotation);
+                virus2.transform.position = transform.position;
                 virus2.SetActive(true);
 
                 // Sound
@@ -52,12 +54,18 @@ public class TissueCell : Agent
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
+        // Push off collision etc.
+        base.OnTriggerEnter2D(collision);
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
         print("test " + Health);
         if (Health > 0 && collision.gameObject.CompareTag(Constants.VIRUS_TAG))
         {
             Virus virus = collision.gameObject.GetComponent<Virus>();
             // A little bit of breaking through cell wall happens or whatever
-            print("dmg " + virus.DamagePower);
+            //print("dmg " + virus.DamagePower);
             Damage(virus.DamagePower);
 
             if (Health <= 0)
@@ -70,18 +78,11 @@ public class TissueCell : Agent
             }
         }
 
-        // Push off collision etc.
-        base.OnTriggerEnter2D(collision);
-    }
-
-    private void OnTriggerStay2D(Collider2D collision)
-    {
         base.OnTriggerStay2D(collision);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         base.OnTriggerExit2D(collision);
-
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 // Moves somewhat randomly based on blood movement, cant control itself
 public class Virus : Agent
 {
-    public float DamagePower = 2;
+    public float DamagePower = 0.2f;
     public GameObject GotIn;
     public float velRange = 10.1f;
 
@@ -13,11 +13,14 @@ public class Virus : Agent
     void Start()
     {
         base.Start();
+        mass = 3;
         tag = Constants.VIRUS_TAG;
 
         // Give initial random velocity
         Velocity = new Vector2(Random.Range(-velRange, velRange) * 10, Random.Range(-velRange, velRange) * 10);
     }
+
+    GameObject attached;
 
     // Update is called once per frame
     void Update()
@@ -29,5 +32,34 @@ public class Virus : Agent
             Vector3 betweenUs = transform.position - GotIn.transform.position; // Vector pointing at us. move in (opposite) by some amount
             transform.position -= betweenUs / 2 * Time.deltaTime;
         }
+    }
+
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (GotIn == null)
+        {
+            // Have a chance to attach while we collide
+            if (Random.Range(0, 1) < 0.05)
+            {
+                //print("attach");
+                attached = collision.gameObject;
+            }
+
+            if (attached != null)
+            {
+                // Stay nearby
+                Vector3 betweenUs = transform.position - attached.transform.position; // Vector pointing at us. move in (opposite) by some amount
+                transform.position -= betweenUs * Time.deltaTime;
+            }
+        }
+        base.OnTriggerStay2D(collision);
+    }
+
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        base.OnTriggerExit2D(collision);
+
+        // Detach
+        attached = null;
     }
 }

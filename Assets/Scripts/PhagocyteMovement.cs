@@ -10,6 +10,7 @@ public class PhagocyteMovement : Agent
     void Start()
     {
         base.Start();
+        mass = 10;
         tag = Constants.PHAGOCYTE_TAG;
     }
 
