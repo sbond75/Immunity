@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class Phagocyte : Agent
 {
-    public float speed = 5;
-
     // Start is called before the first frame update
     void Start()
     {
+        base.Start();
         tag = Constants.PHAGOCYTE_TAG;
     }
 
@@ -16,25 +15,16 @@ public class Phagocyte : Agent
     protected void Update()
     {
         base.Update();
-        PhagocyteMoveKeyBoard();
     }
 
-    void PhagocyteMoveKeyBoard()
+    protected void OnTriggerEnter2D(Collider2D collision)
     {
-        float h = Input.GetAxis("Horizontal");
-        float v = Input.GetAxis("Vertical");
-
-        Vector2 position = transform.position;
-        position.x += h * speed * Time.deltaTime;
-        position.y += v * speed * Time.deltaTime;
-        transform.position = position;
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
+        base.OnTriggerEnter2D(collision);
+        print("co;");
         if (collision.gameObject.CompareTag(Constants.VIRUS_TAG))
         {
-            Damage(10);
+            // Eat it up
+            Destroy(collision.gameObject);
         }
     }
 
