@@ -51,7 +51,7 @@ public class TissueCell : Agent
             Damage(healthDec);
 
             // Color tint
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(1 / -Health, 1 / -Health, 1 / -Health, 1);
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(1 * -(Health / 10), 1 * -(Health / 10), 1 * -(Health / 10), 1);
 
             if (Health < -0.05f) // Let the production warm up after infection basically
             {

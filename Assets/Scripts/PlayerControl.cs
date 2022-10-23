@@ -44,8 +44,8 @@ public class PlayerControl : MonoBehaviour
         float v = Input.GetAxis("Vertical");
 
         Vector2 position = transform.position;
-        position.x += h * speed * Time.deltaTime;
-        position.y += v * speed * Time.deltaTime;
+        position.x += h * speed * Time.deltaTime * Constants.WORLD_SCALE;
+        position.y += v * speed * Time.deltaTime * Constants.WORLD_SCALE;
         transform.position = position;
     }
 

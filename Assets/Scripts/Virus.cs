@@ -18,10 +18,13 @@ public class Virus : Agent
         tag = Constants.VIRUS_TAG;
 
         // Give initial random velocity
+        velRange = velRange * Constants.WORLD_SCALE;
         Velocity = new Vector2(Random.Range(-velRange, velRange) * 10, Random.Range(-velRange, velRange) * 10);
 
         // This virus is BCell movable
         gameObject.AddComponent<BCellMovable>();
+
+        transform.localScale = new Vector3(Constants.WORLD_SCALE, Constants.WORLD_SCALE, Constants.WORLD_SCALE) * 0.1f * 5;
     }
 
     public GameObject attached;

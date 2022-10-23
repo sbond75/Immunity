@@ -8,6 +8,7 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private DialogueObject testDialogue;
 
     private TypewriterEffect typewriterEffect;
+    bool skipTutorial = true;
 
     private void Start()
     {
@@ -22,10 +23,13 @@ public class DialogueUI : MonoBehaviour
 
     private IEnumerator StepThroughDialogue(DialogueObject dialogueObject)
     {
-        foreach (string dialogue in dialogueObject.Dialogue)
+        if (!skipTutorial)
         {
-            yield return typewriterEffect.Run(dialogue, textLabel);
-            yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+            foreach (string dialogue in dialogueObject.Dialogue)
+            {
+                yield return typewriterEffect.Run(dialogue, textLabel);
+                yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
+            }
         }
         // End of tutorial
         var m = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();

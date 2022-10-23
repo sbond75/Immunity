@@ -10,12 +10,14 @@ public class Antibody : Agent
     Vector3 attachedRelTo;
     public float velRange = 10.1f;
     private float timeLastInhibit = 10.0f;
+    float elapsed = 0;
 
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
         tag = Constants.ANTIBODY_TAG;
+        transform.localScale = new Vector3(Constants.WORLD_SCALE, Constants.WORLD_SCALE, Constants.WORLD_SCALE) * 0.3f;
     }
 
     // Update is called once per frame
@@ -23,6 +25,11 @@ public class Antibody : Agent
     {
         base.Update();
 
+        elapsed += Time.deltaTime;
+        if (elapsed > 9)
+        {
+            Destroy(gameObject);
+        }
         if (attached != null)
         {
             transform.position = attached.transform.position + attachedRelTo;

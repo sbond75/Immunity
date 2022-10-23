@@ -12,11 +12,11 @@ TagManager:
   - Antibody
   - BCell
   - HelperT
-  - TCell
   - Spawner
   - LymphNode
   - DialogueBox
   - GameManager
+  - KillerT
   layers:
   - Default
   - TransparentFX

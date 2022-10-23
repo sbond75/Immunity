@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
         set
         {
             currentPlayer = value;
+            currentPlayer.GetComponent<Agent>().Velocity = Vector2.zero;
         }
     }
     public GameObject Spawner;

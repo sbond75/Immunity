@@ -22,10 +22,10 @@ public class AIControl : PlayerControl
         if (Mathf.Sin(elapsed / 100) > 0.2)
         {
             // Slow down
-            GetComponent<Agent>().Velocity = new Vector2(GetComponent<Agent>().Velocity.x * 0.8f, GetComponent<Agent>().Velocity.y * 0.8f);// TODO: need time.deltatime here
+            GetComponent<Agent>().Velocity = new Vector2(GetComponent<Agent>().Velocity.x * 0.7f, GetComponent<Agent>().Velocity.y * 0.7f) * Constants.WORLD_SCALE;// TODO: need time.deltatime here
 
         }
-        GetComponent<Agent>().Velocity = new Vector2(GetComponent<Agent>().Velocity.x + h * speed * Time.deltaTime * Mathf.Sin(elapsed), GetComponent<Agent>().Velocity.y + v * speed * Time.deltaTime * Mathf.Cos(elapsed));
+        GetComponent<Agent>().Velocity = new Vector2(GetComponent<Agent>().Velocity.x + h * speed * Time.deltaTime * Mathf.Sin(elapsed), GetComponent<Agent>().Velocity.y + v * speed * Time.deltaTime * Mathf.Cos(elapsed)) * Constants.WORLD_SCALE;
         transform.position = position;
 
         Phagocyte p = GetComponent<Phagocyte>();
