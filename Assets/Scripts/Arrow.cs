@@ -4,14 +4,14 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    public GameObject target;
+    public BCell target;
     //public float HideDistance;
     // Start is called before the first frame update
     void Start()
     {
         
     }
-    public void setTarget(GameObject value)
+    public void setTarget(BCell value)
     {
         target = value;
     }

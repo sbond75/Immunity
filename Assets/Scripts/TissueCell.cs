@@ -8,7 +8,7 @@ public class TissueCell : Agent
     float spawnVirusWaitingTime = 3; // seconds
     float spawnVirusRandomization = 1; // plus or minus the above
     float spawnVirusRadius = 1;
-    float healthDec = 0.5f; // When infected
+    public float healthDec = 0.5f; // When infected
     float spawnCount = 5; // viruses to spawn
     float spawnCountVariation = 3; // plus or minus the above
 
@@ -31,7 +31,6 @@ public class TissueCell : Agent
     // Update is called once per frame
     void Update()
     {
-        print(Health);
         base.Update();
     }
 

@@ -5,7 +5,7 @@ using System.Collections;
 public class BCellMovable : MonoBehaviour
 {
     // The BCell we're attached to
-    GameObject attached = null;
+    public GameObject attached = null;
     Vector3 orig;
 
     // Use this for initialization
@@ -24,11 +24,14 @@ public class BCellMovable : MonoBehaviour
     {
         // Bcell's passive ability: make the virus and infected cells stick to it.
         // BCellMovable must check if a BCell is nearby and then move to its position
-        if (collision.gameObject.CompareTag(Constants.BCELL_TAG))
+        if (collision.gameObject.CompareTag(Constants.BCELL_TAG) && attached == null)
         {
-            attached = collision.gameObject;
-            orig = transform.position - attached.transform.position;
-            attached.GetComponent<BCell>().Carrying = gameObject;
+            if (collision.gameObject.GetComponent<BCell>().Carrying == null)
+            {
+                attached = collision.gameObject;
+                orig = transform.position - attached.transform.position;
+                attached.GetComponent<BCell>().Carrying = gameObject;
+            }
         }
 
         if (attached != null)

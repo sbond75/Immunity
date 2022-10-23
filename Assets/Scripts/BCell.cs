@@ -23,7 +23,7 @@ public class BCell : Agent
     protected void Update()
     {
         base.Update();
-
+        print(Carrying.GetComponent<TissueCell>().Health);
         timeSinceFire += Time.deltaTime;
         if (Input.GetButtonDown("Fire1") && timeSinceFire > fireTime)
         {
