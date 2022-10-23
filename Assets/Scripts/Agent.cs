@@ -44,6 +44,29 @@ public class Agent : MonoBehaviour
             rb.gravityScale = 0;
             rb.isKinematic = true;
         }
+
+        transform.localScale = new Vector3(Constants.WORLD_SCALE, Constants.WORLD_SCALE, Constants.WORLD_SCALE);
+
+        // Choose the first player object
+        GameManager m = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        if (IsPlayable() && m.StartedGame)
+        {
+            if (m.CurrentPlayer == null)
+            {
+                m.CurrentPlayer = gameObject;
+                gameObject.AddComponent<PlayerControl>();
+            }
+            else
+            {
+                gameObject.AddComponent<AIControl>();
+            }
+        }
+    }
+
+    // Whether this is playable by the player
+    public bool IsPlayable()
+    {
+        return GetType().Name == "BCell" || GetType().Name == "HelperT" || GetType().Name == "KillerT" || GetType().Name == "Phagocyte";
     }
 
     // Update is called once per frame
@@ -53,6 +76,31 @@ public class Agent : MonoBehaviour
         position.x += velocity.x * Time.deltaTime;
         position.y += velocity.y * Time.deltaTime;
         transform.position = position;
+
+        float lowerLim = 150;
+        if (transform.position.y < lowerLim)
+        {
+            transform.position = new Vector2(transform.position.x, lowerLim);
+            velocity.y = Mathf.Abs(velocity.y);
+        }
+        float upperLim = 1080 - lowerLim;
+        if (transform.position.y > upperLim)
+        {
+            transform.position = new Vector2(transform.position.x, upperLim);
+            velocity.y = -Mathf.Abs(velocity.y);
+        }
+        float leftLim = transform.localScale.x;
+        if (transform.position.x < leftLim)
+        {
+            transform.position = new Vector2(leftLim, transform.position.y);
+            velocity.x = Mathf.Abs(velocity.x);
+        }
+        float rightLim = 1920 - leftLim;
+        if (transform.position.x > rightLim)
+        {
+            transform.position = new Vector2(rightLim, transform.position.y);
+            velocity.x = -Mathf.Abs(velocity.x);
+        }
     }
 
     protected void OnTriggerEnter2D(UnityEngine.Collider2D collision)

@@ -27,5 +27,11 @@ public class DialogueUI : MonoBehaviour
             yield return typewriterEffect.Run(dialogue, textLabel);
             yield return new WaitUntil(() => Input.GetKeyDown(KeyCode.Space));
         }
+        // End of tutorial
+        var m = GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>();
+        m.StartedGame = true;
+        m.Spawner.GetComponent<Spawner>().StartSpawning(); //GameObject.FindGameObjectWithTag("Spawner").SetActive(true); // NOTE: you can't find disabled objects
+        GameObject.FindGameObjectWithTag("LymphNode").SetActive(false);
+        GameObject.FindGameObjectWithTag("DialogueBox").SetActive(false);
     }
 }

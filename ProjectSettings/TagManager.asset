@@ -13,6 +13,10 @@ TagManager:
   - BCell
   - HelperT
   - TCell
+  - Spawner
+  - LymphNode
+  - DialogueBox
+  - GameManager
   layers:
   - Default
   - TransparentFX

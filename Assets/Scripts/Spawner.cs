@@ -17,6 +17,11 @@ public class Spawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().Spawner = gameObject;
+    }
+
+    public void StartSpawning()
+    {
         StartCoroutine(SpawnCells());
     }
 

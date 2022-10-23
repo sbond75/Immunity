@@ -9,4 +9,5 @@ public class Constants
     public static String ANTIBODY_TAG = "Antibody";
     public static String HELPER_T_TAG = "HelperT";
     public static String KILLER_T_TAG = "TCell";
+    public static float WORLD_SCALE = 20;
 }

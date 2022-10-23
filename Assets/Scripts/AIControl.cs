@@ -3,6 +3,8 @@ using System.Collections;
 
 public class AIControl : PlayerControl
 {
+    float elapsed = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -15,8 +17,15 @@ public class AIControl : PlayerControl
         var h = Random.Range(-1f, 1f);
         var v = Random.Range(-1.0f, 1.0f);
 
+        elapsed += Time.deltaTime;
         Vector2 position = transform.position;
-        GetComponent<Agent>().Velocity = new Vector2(GetComponent<Agent>().Velocity.x + h * speed * Time.deltaTime, GetComponent<Agent>().Velocity.y + v * speed * Time.deltaTime);
+        if (Mathf.Sin(elapsed / 100) > 0.2)
+        {
+            // Slow down
+            GetComponent<Agent>().Velocity = new Vector2(GetComponent<Agent>().Velocity.x * 0.8f, GetComponent<Agent>().Velocity.y * 0.8f);// TODO: need time.deltatime here
+
+        }
+        GetComponent<Agent>().Velocity = new Vector2(GetComponent<Agent>().Velocity.x + h * speed * Time.deltaTime * Mathf.Sin(elapsed), GetComponent<Agent>().Velocity.y + v * speed * Time.deltaTime * Mathf.Cos(elapsed));
         transform.position = position;
 
         Phagocyte p = GetComponent<Phagocyte>();
@@ -29,7 +38,7 @@ public class AIControl : PlayerControl
         {
             // Shoot antibodies
             fire = false;
-            if (Random.Range(0, 1) < 0.3)
+            if (Random.Range(0.0f, 1.0f) < 0.3)
             {
                 var closest = GetComponent<Agent>().GetClosestInstance(GameObject.FindGameObjectsWithTag(Constants.VIRUS_TAG));
                 if (closest != null)
