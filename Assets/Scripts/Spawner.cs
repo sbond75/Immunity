@@ -33,18 +33,15 @@ public class Spawner : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(2, 3));
             
             randomIndex = Random.Range(0, cellReferences.Length);
-            randomSide = Random.Range(0, spawnerRefenrences.Length);
-
-            spawnedCell = Instantiate(cellReferences[randomIndex]);
-            spawnedCell.transform.position = spawnerRefenrences[randomSide].position;
-
-
-            //vaccine and about to generate virus, stop
-            if (VaccineMode.vaccine && spawnedCell.GetComponent<Virus>() != null && Random.Range(0, 2) < 0.5)
+            if (randomIndex < 5)
             {
-                continue;
-            } else
-            {
+                randomSide = Random.Range(0, spawnerRefenrences.Length);
+
+                spawnedCell = Instantiate(cellReferences[randomIndex]);
+                spawnedCell.transform.position = spawnerRefenrences[randomSide].position;
+
+
+                //vaccine and about to generate virus, stop
                 if (randomIndex < 3)
                 {
                     spawnedCell.GetComponent<Agent>().velocity = new Vector2(-Random.Range(10, 20), -Random.Range(10, 20));
