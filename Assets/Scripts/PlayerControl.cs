@@ -14,10 +14,10 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        PhagocyteMoveKeyBoard();
+        MoveKeyBoard();
     }
     
-    void PhagocyteMoveKeyBoard()
+    void MoveKeyBoard()
     {
         float h = Input.GetAxis("Horizontal");
         float v = Input.GetAxis("Vertical");

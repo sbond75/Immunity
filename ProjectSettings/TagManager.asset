@@ -9,6 +9,7 @@ TagManager:
   - Virus
   - Phagocyte
   - Wall
+  - TCell
   layers:
   - Default
   - TransparentFX
