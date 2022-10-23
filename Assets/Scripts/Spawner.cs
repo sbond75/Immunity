@@ -33,7 +33,7 @@ public class Spawner : MonoBehaviour
             yield return new WaitForSeconds(Random.Range(2, 3));
             
             randomIndex = Random.Range(0, cellReferences.Length);
-            if (randomIndex < 5)
+            if (!VaccineMode.vaccine || (VaccineMode.vaccine && randomIndex < 5))
             {
                 randomSide = Random.Range(0, spawnerRefenrences.Length);
 

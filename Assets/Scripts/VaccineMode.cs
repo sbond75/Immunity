@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class VaccineMode : MonoBehaviour
 {
-    static public bool vaccine = true;
+    static public bool vaccine = false;
 
     static public void set(bool value)
     {

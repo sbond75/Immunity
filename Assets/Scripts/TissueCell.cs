@@ -68,6 +68,7 @@ public class TissueCell : Agent
                 virus2_.creator = gameObject;
                 virus2_.attached = null;
                 virus2_.GotIn = null;
+                //virus2_.Velocity = virus2_.randomVelocity();
                 virus2.SetActive(true);
 
                 // Sound
@@ -92,7 +93,7 @@ public class TissueCell : Agent
             Virus virus = collision.gameObject.GetComponent<Virus>();
             // A little bit of breaking through cell wall happens or whatever
             //print("dmg " + virus.DamagePower);
-            Damage(virus.DamagePower);
+            Damage(virus.DamagePower * (VaccineMode.vaccine ? 0.1f : 1.0f));
 
             if (Health <= 0)
             {

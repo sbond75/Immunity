@@ -7,8 +7,13 @@ public class Virus : Agent
 {
     public float DamagePower = 0.2f;
     public GameObject GotIn;
-    public float velRange = 10.1f;
+    public float velRange = 0.01f; //10.1f;
     public GameObject creator;
+
+    public Vector3 randomVelocity()
+    {
+        return new Vector2(Random.Range(-velRange, velRange) * 10, Random.Range(-velRange, velRange) * 10);
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +24,7 @@ public class Virus : Agent
 
         // Give initial random velocity
         velRange = velRange * Constants.WORLD_SCALE;
-        Velocity = new Vector2(Random.Range(-velRange, velRange) * 10, Random.Range(-velRange, velRange) * 10);
+        Velocity = randomVelocity();
 
         // This virus is BCell movable
         //gameObject.AddComponent<BCellMovable>();
