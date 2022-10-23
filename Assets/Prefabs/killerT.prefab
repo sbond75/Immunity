@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 111716386170257422}
   - component: {fileID: 111716386170257423}
   - component: {fileID: 111716386170257416}
-  - component: {fileID: 111716386170257417}
   - component: {fileID: 111716386170257419}
   m_Layer: 0
   m_Name: killerT
@@ -104,20 +103,7 @@ MonoBehaviour:
   velocity: {x: 0, y: 0}
   mass: 4
   target: {fileID: 0}
-  arrow: {fileID: 0}
---- !u!114 &111716386170257417
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 111716386170257420}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 28694675407c044ff892a843ac9f2eba, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
+  arrow: {fileID: 111716387889150622}
 --- !u!58 &111716386170257419
 CircleCollider2D:
   m_ObjectHideFlags: 0

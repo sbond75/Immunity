@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 public class Constants
 {
     public static String VIRUS_TAG = "Virus";
@@ -6,10 +6,12 @@ public class Constants
     public static String TISSUE_CELL_TAG = "TissueCell";
     public static String PHAGOCYTE_TAG = "Phagocyte";
     public static String BCELL_TAG = "BCell";
-<<<<<<< HEAD
+    public static String KILLER_T_TAG = "KillerT";
     public static String ANTIBODY_TAG = "Antibody";
     public static String HELPER_T_TAG = "HelperT";
-=======
+<<<<<<< HEAD
     public static String KILLER_T_TAG = "TCell";
->>>>>>> b205b58294b6a6d91f3be7dd36e869d345c59733
+    public static float WORLD_SCALE = 20;
+=======
+>>>>>>> 12e104773ea5b654b87c6be0ac9bbaeb26e8eabd
 }

@@ -43,12 +43,12 @@ public class Spawner : MonoBehaviour
             {
                 if (randomIndex < 3)
                 {
-                    spawnedCell.GetComponent<Agent>().velocity = new Vector2(-Random.Range(100, 200), -Random.Range(100, 200));
+                    spawnedCell.GetComponent<Agent>().velocity = new Vector2(-Random.Range(10, 20), -Random.Range(10, 20));
 
                 }
                 else
                 {
-                    spawnedCell.GetComponent<Agent>().velocity = new Vector2(Random.Range(100, 200), Random.Range(100, 200));
+                    spawnedCell.GetComponent<Agent>().velocity = new Vector2(Random.Range(10, 20), Random.Range(10, 20));
                     spawnedCell.transform.localScale = new Vector3(1f, -1f, 1f);
                 }
             }
