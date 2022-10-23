@@ -10,7 +10,18 @@ public class BCell : Agent
     public float launchVelocity = 700f;
     private float fireTime = 0.5f; //seconds
     private float timeSinceFire = 0f;
-    public GameObject Carrying;
+    private GameObject carrying;
+    public GameObject Carrying
+    {
+        get
+        {
+            return carrying;
+        }
+        set
+        {
+            carrying = value;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -23,7 +34,6 @@ public class BCell : Agent
     protected void Update()
     {
         base.Update();
-        print(Carrying.GetComponent<TissueCell>().Health);
         timeSinceFire += Time.deltaTime;
         if (Input.GetButtonDown("Fire1") && timeSinceFire > fireTime)
         {

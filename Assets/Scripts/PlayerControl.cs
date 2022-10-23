@@ -4,7 +4,19 @@ using UnityEngine;
 
 public class PlayerControl : MonoBehaviour
 {
-    public float speed = 5;
+    public const float SPEED = 5;
+    public float speed = SPEED;
+
+    protected bool fire = false;
+    public bool Fire { get { return fire; } }
+    protected Vector3 shootDirection;
+    public Vector3 ShootDirection
+    {
+        get
+        {
+            return shootDirection;
+        }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -15,6 +27,14 @@ public class PlayerControl : MonoBehaviour
     protected void Update()
     {
         MoveKeyBoard();
+
+        fire = Input.GetButtonDown("Fire1");
+        if (fire)
+        {
+            shootDirection = Input.mousePosition;
+            shootDirection.z = 0.0f;
+            shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+        }
     }
     
     void MoveKeyBoard()

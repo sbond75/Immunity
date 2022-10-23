@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 public class Constants
 {
     public static String VIRUS_TAG = "Virus";
