@@ -12,6 +12,14 @@ public class TissueCell : Agent
     float spawnCount = 5; // viruses to spawn
     float spawnCountVariation = 3; // plus or minus the above
 
+    public bool Infected
+    {
+        get
+        {
+            return Health < 0;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -23,7 +31,7 @@ public class TissueCell : Agent
     // Update is called once per frame
     void Update()
     {
-
+        base.Update();
     }
 
     // https://answers.unity.com/questions/1396115/making-coroutine-repeat.html
