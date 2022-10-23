@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c55ca4c356c6944099b0adc4089174db, type: 3}
+  m_Name: Test
+  m_EditorClassIdentifier: 
+  dialogue:
+  - Hello soldier! I am Lymph Node, and I'm here to guide through the battle of your
+    life (literally).
+  - Immunity is a game that puts you in control of cells to teach you how your immune
+    system works.
+  - 'Your primary objective?
+
+    To rid the bloodstream of viruses.'
+  - Each playable cell has special abilities that contribute to the overall immune
+    response.
+  - Phagocytes
+  - Helper T Cells
+  - Killer T Cells
+  - B Cells
+  - If you hit Game Over, try playing in Vaccine Mode. It's easier because the vaccine
+    does the grunt work before you start!
+  - I hope you got all that. The whole body is counting on you. Best of luck!
