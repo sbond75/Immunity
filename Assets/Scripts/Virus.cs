@@ -40,6 +40,8 @@ public class Virus : Agent
 
     private void OnTriggerStay2D(Collider2D collision)
     {
+        Vector3 betweenUs;
+
         if (GotIn == null && !collision.gameObject.CompareTag("Virus"))
         {
             // Have a chance to attach while we collide
@@ -52,11 +54,16 @@ public class Virus : Agent
             if (attached != null)
             {
                 // Stay nearby
-                Vector3 betweenUs = transform.position - attached.transform.position; // Vector pointing at us. move in (opposite) by some amount
+                betweenUs = transform.position - attached.transform.position; // Vector pointing at us. move in (opposite) by some amount
                 transform.position -= betweenUs * Time.deltaTime;
             }
         }
-        base.OnTriggerStay2D(collision);
+
+        //base.OnTriggerStay2D(collision);
+        //print("push off");
+        // Push off collision
+        betweenUs = transform.position - collision.gameObject.transform.position; // Vector pointing at us. move off by some amount
+        transform.position += betweenUs / mass * Time.deltaTime;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

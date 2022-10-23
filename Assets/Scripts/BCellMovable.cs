@@ -5,7 +5,7 @@ using System.Collections;
 public class BCellMovable : MonoBehaviour
 {
     // The BCell we're attached to
-    GameObject attached = null;
+    public GameObject attached = null;
     Vector3 orig;
 
     // Use this for initialization
@@ -31,6 +31,12 @@ public class BCellMovable : MonoBehaviour
                 attached = collision.gameObject;
                 orig = transform.position - attached.transform.position;
                 attached.GetComponent<BCell>().Carrying = gameObject;
+
+                // Slow down the BCell if it is attached tissue cell
+                if (attached.CompareTag(Constants.TISSUE_CELL_TAG))
+                {
+                    attached.GetComponent<PlayerControl>().speed = 1;
+                }
             }
         }
 
@@ -47,6 +53,12 @@ public class BCellMovable : MonoBehaviour
         if (collision.gameObject == attached)
         {
             attached.GetComponent<BCell>().Carrying = null;
+            if (attached.CompareTag(Constants.TISSUE_CELL_TAG))
+            {
+                attached.GetComponent<PlayerControl>().speed = PlayerControl.SPEED;
+            }
+
+            attached = null;
         }
     }
 }

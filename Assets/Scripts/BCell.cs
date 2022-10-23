@@ -19,18 +19,31 @@ public class BCell : Agent
         }
         set
         {
-            if (carrying != null)
-            {
-                carrying.GetComponent<BCellMovable>().attached = null;
-            }
-
-            value.GetComponent<BCellMovable>().attached = gameObject;
             carrying = value;
-            
         }
     }
+    //public GameObject Carrying
+    //{
+    //    get
+    //    {
+    //        return carrying;
+    //    }
+    //    set
+    //    {
+    //        print("carr: " + carrying);
+    //        if (carrying != null)
+    //        {
+    //            carrying.GetComponent<BCellMovable>().attached = null;
+    //        }
 
-    // Start is called before the first frame update
+    //        print("VALUE: " + value.GetComponent<BCellMovable>());
+    //        value.GetComponent<BCellMovable>().attached = gameObject;
+    //        carrying = value;
+
+    //    }
+    //}
+
+        // Start is called before the first frame update
     void Start()
     {
         base.Start();
@@ -43,17 +56,14 @@ public class BCell : Agent
         base.Update();
 
         timeSinceFire += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && timeSinceFire > fireTime)
+        if (GetComponent<PlayerControl>().Fire && timeSinceFire > fireTime)
         {
             print("fire");
             timeSinceFire = 0;
 
             // https://answers.unity.com/questions/604198/shooting-in-direction-of-mouse-cursor-2d.html
             //...setting shoot direction
-            Vector3 shootDirection;
-            shootDirection = Input.mousePosition;
-            shootDirection.z = 0.0f;
-            shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
+            var shootDirection = GetComponent<PlayerControl>().ShootDirection;
             shootDirection = shootDirection - transform.position;
             //...instantiating the rocket
             GameObject bulletInstance = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
