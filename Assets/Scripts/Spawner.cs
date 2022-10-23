@@ -24,7 +24,15 @@ public class Spawner : MonoBehaviour
     {
         while (true)
         {
-            yield return new WaitForSeconds(Random.Range(1, 2));
+            if (VaccineMode.vaccine)
+            {
+                yield return new WaitForSeconds(Random.Range(4, 6));
+            }
+            else
+            {
+                yield return new WaitForSeconds(Random.Range(1, 3));
+            }
+            
             randomIndex = Random.Range(0, cellReferences.Length);
             randomSide = Random.Range(0, spawnerRefenrences.Length);
 
