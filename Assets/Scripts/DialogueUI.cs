@@ -8,7 +8,7 @@ public class DialogueUI : MonoBehaviour
     [SerializeField] private DialogueObject testDialogue;
 
     private TypewriterEffect typewriterEffect;
-    bool skipTutorial = true;
+    bool skipTutorial = false;
 
     private void Start()
     {

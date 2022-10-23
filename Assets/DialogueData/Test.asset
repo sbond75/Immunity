@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Test
   m_EditorClassIdentifier: 
   dialogue:
-  - Hello soldier! I am Lymph Node, and I'm here to guide through the battle of your
-    life (literally).
+  - Hello soldier! I am Lymph Node, and I'm here to guide you through the battle
+    of your life (literally).
   - Immunity is a game that puts you in control of cells to teach you how your immune
     system works.
   - 'Your primary objective?
@@ -22,10 +22,16 @@ MonoBehaviour:
     To rid the bloodstream of viruses.'
   - Each playable cell has special abilities that contribute to the overall immune
     response.
-  - Phagocytes
-  - Helper T Cells
-  - Killer T Cells
-  - B Cells
+  - Phagocytes (white) gobble up viruses that have not yet infected a host cell.
+    Move toward viruses using WASD or the arrow keys.
+  - "Helper T Cells\u2019 (purple) job is to stay near viruses that other antibodies
+    have stuck to instruct other cells to finish the deed. Move using WASD or the
+    arrow keys."
+  - "B Cells (blue)  have two abilities: shoot antibodies by clicking in the direction
+    you\u2019d like to aim and restrain infected cells until Killer Ts get there.
+    Once again, move using WASD or the arrow keys."
+  - Finally, Killer T Cells (green with spikes) inject instructions to kill infected
+    tissue cells held by B cells. As before, move using WASD or the arrow keys.
   - If you hit Game Over, try playing in Vaccine Mode. It's easier because the vaccine
     does the grunt work before you start!
   - I hope you got all that. The whole body is counting on you. Best of luck!
