@@ -24,14 +24,7 @@ public class Spawner : MonoBehaviour
     {
         while (true)
         {
-            if (VaccineMode.vaccine)
-            {
-                yield return new WaitForSeconds(Random.Range(4, 6));
-            }
-            else
-            {
-                yield return new WaitForSeconds(Random.Range(1, 3));
-            }
+            yield return new WaitForSeconds(Random.Range(2, 3));
             
             randomIndex = Random.Range(0, cellReferences.Length);
             randomSide = Random.Range(0, spawnerRefenrences.Length);
@@ -39,14 +32,20 @@ public class Spawner : MonoBehaviour
             spawnedCell = Instantiate(cellReferences[randomIndex]);
             spawnedCell.transform.position = spawnerRefenrences[randomSide].position;
 
-            if (randomIndex < 3)
-            {
-                spawnedCell.GetComponent<Agent>().velocity = new Vector2(-Random.Range(100, 200), -Random.Range(100, 200));
+            print(spawnedCell.GetComponent<Virus>());
 
-            } else
+            if (spawnedCell.GetComponent<Virus>() != null)
             {
-                spawnedCell.GetComponent<Agent>().velocity = new Vector2(Random.Range(100, 200), Random.Range(100, 200));
-                spawnedCell.transform.localScale = new Vector3(1f, -1f, 1f);
+                if (randomIndex < 3)
+                {
+                    spawnedCell.GetComponent<Agent>().velocity = new Vector2(-Random.Range(100, 200), -Random.Range(100, 200));
+
+                }
+                else
+                {
+                    spawnedCell.GetComponent<Agent>().velocity = new Vector2(Random.Range(100, 200), Random.Range(100, 200));
+                    spawnedCell.transform.localScale = new Vector3(1f, -1f, 1f);
+                }
             }
         }
     }
