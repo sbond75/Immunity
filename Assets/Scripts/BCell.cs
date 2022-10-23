@@ -22,28 +22,8 @@ public class BCell : Agent
             carrying = value;
         }
     }
-    //public GameObject Carrying
-    //{
-    //    get
-    //    {
-    //        return carrying;
-    //    }
-    //    set
-    //    {
-    //        print("carr: " + carrying);
-    //        if (carrying != null)
-    //        {
-    //            carrying.GetComponent<BCellMovable>().attached = null;
-    //        }
 
-    //        print("VALUE: " + value.GetComponent<BCellMovable>());
-    //        value.GetComponent<BCellMovable>().attached = gameObject;
-    //        carrying = value;
-
-    //    }
-    //}
-
-        // Start is called before the first frame update
+    // Start is called before the first frame update
     void Start()
     {
         base.Start();
@@ -54,16 +34,18 @@ public class BCell : Agent
     protected void Update()
     {
         base.Update();
-
         timeSinceFire += Time.deltaTime;
-        if (GetComponent<PlayerControl>().Fire && timeSinceFire > fireTime)
+        if (Input.GetButtonDown("Fire1") && timeSinceFire > fireTime)
         {
             print("fire");
             timeSinceFire = 0;
 
             // https://answers.unity.com/questions/604198/shooting-in-direction-of-mouse-cursor-2d.html
             //...setting shoot direction
-            var shootDirection = GetComponent<PlayerControl>().ShootDirection;
+            Vector3 shootDirection;
+            shootDirection = Input.mousePosition;
+            shootDirection.z = 0.0f;
+            shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
             shootDirection = shootDirection - transform.position;
             //...instantiating the rocket
             GameObject bulletInstance = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));

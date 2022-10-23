@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class KillerT : Agent
 {
+    public BCell target;
+    public Arrow arrow;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,6 +17,38 @@ public class KillerT : Agent
     void Update()
     {
         base.Update();
+        findInfectedBCells();
+        //check arrow's reference
+        if (target == null)
+        {
+            arrow.setTarget(null);
+        }
+    }
+
+    void findInfectedBCells()
+    {
+        GameObject[] BCellsToCheck = GameObject.FindGameObjectsWithTag("BCell");
+        
+        List<GameObject> BCellsWithInfected = new List<GameObject>();
+        foreach (GameObject Bcell in BCellsToCheck)
+        {
+
+            GameObject carrying = Bcell.GetComponent<BCell>().Carrying;
+            if (carrying != null && carrying.CompareTag(Constants.TISSUE_CELL_TAG))
+            {
+                BCellsWithInfected.Add(Bcell);
+            }
+        }
+        if (BCellsWithInfected.Count != 0)
+        {
+            target = GetClosestInstance(BCellsWithInfected.ToArray()).GetComponent<BCell>();
+            arrow.setTarget(target);
+        }
+    }
+
+    public GameObject GetClosestInstance(GameObject[] instances)
+    {
+        return base.GetClosestInstance(instances);
     }
 
     private void Damage(float changeAmount)
@@ -29,11 +63,10 @@ public class KillerT : Agent
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        if (collision.gameObject.CompareTag(Constants.BCELL_TAG))
+        if (collision.gameObject == target.Carrying)
         {
-
-            // Eat it up
-            Destroy(collision.gameObject);
+            //accelerating death but not destroying the object
+            target.Carrying.GetComponent<TissueCell>().healthDec *= 10;
         }
     }
 }

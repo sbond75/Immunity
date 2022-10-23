@@ -4,18 +4,31 @@ using UnityEngine;
 
 public class Arrow : MonoBehaviour
 {
-    public GameObject target;
-    public float HideDistance;
+    public BCell target;
+    //public float HideDistance;
     // Start is called before the first frame update
     void Start()
     {
         
     }
-
+    public void setTarget(BCell value)
+    {
+        target = value;
+    }
     // Update is called once per frame
     void Update()
     {
-        var dir = target.transform.position - transform.position;
+        if (target == null)
+        {
+            gameObject.SetActive(false);
+        }
+        else
+        {
+            gameObject.SetActive(true);
+            var dir = target.transform.position - transform.position;
+            var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
+            transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+        }
 
         //if (dir.magnitude < HideDistance)
         //{
@@ -24,8 +37,7 @@ public class Arrow : MonoBehaviour
         //{
         //    SetChildActive(true);
         //}
-        var angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-        transform.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+
         //transform.RotateAround(transform.parent.position, Vector2.up, 20 * Time.deltaTime);
     }
 

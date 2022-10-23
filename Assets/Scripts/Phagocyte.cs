@@ -20,7 +20,6 @@ public class Phagocyte : Agent
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
-        print("co;");
         if (collision.gameObject.CompareTag(Constants.VIRUS_TAG))
         {
             // Eat it up

@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 717028783619953053}
   m_Layer: 0
   m_Name: tissueCell
-  m_TagString: Untagged
+  m_TagString: TissueCell
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -137,4 +137,3 @@ MonoBehaviour:
   maxHealth: 100
   velocity: {x: 0, y: 0}
   mass: 4
-  healthDec: 0.5
