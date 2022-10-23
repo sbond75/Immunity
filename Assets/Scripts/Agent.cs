@@ -78,28 +78,29 @@ public class Agent : MonoBehaviour
         transform.position = position;
 
         float lowerLim = 150;
+        float slow = 0.95f;
         if (transform.position.y < lowerLim)
         {
             transform.position = new Vector2(transform.position.x, lowerLim);
-            velocity.y = Mathf.Abs(velocity.y);
+            velocity.y = Mathf.Abs(velocity.y) * slow;
         }
         float upperLim = 1080 - lowerLim;
         if (transform.position.y > upperLim)
         {
             transform.position = new Vector2(transform.position.x, upperLim);
-            velocity.y = -Mathf.Abs(velocity.y);
+            velocity.y = -Mathf.Abs(velocity.y) * slow;
         }
         float leftLim = transform.localScale.x;
         if (transform.position.x < leftLim)
         {
             transform.position = new Vector2(leftLim, transform.position.y);
-            velocity.x = Mathf.Abs(velocity.x);
+            velocity.x = Mathf.Abs(velocity.x) * slow;
         }
         float rightLim = 1920 - leftLim;
         if (transform.position.x > rightLim)
         {
             transform.position = new Vector2(rightLim, transform.position.y);
-            velocity.x = -Mathf.Abs(velocity.x);
+            velocity.x = -Mathf.Abs(velocity.x) * slow;
         }
     }
 

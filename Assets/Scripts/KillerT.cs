@@ -63,6 +63,10 @@ public class KillerT : Agent
     protected void OnTriggerEnter2D(Collider2D collision)
     {
         base.OnTriggerEnter2D(collision);
+        if (target == null)
+        {
+            return;
+        }
         if (collision.gameObject == target.Carrying)
         {
             //accelerating death but not destroying the object

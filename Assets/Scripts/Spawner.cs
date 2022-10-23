@@ -49,7 +49,7 @@ public class Spawner : MonoBehaviour
                 else
                 {
                     spawnedCell.GetComponent<Agent>().velocity = new Vector2(Random.Range(10, 20), Random.Range(10, 20));
-                    spawnedCell.transform.localScale = new Vector3(1f, -1f, 1f);
+                    //spawnedCell.transform.localScale = new Vector3(1f, -1f, 1f);
                 }
             }
         }

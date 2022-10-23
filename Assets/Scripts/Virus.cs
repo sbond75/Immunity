@@ -22,7 +22,7 @@ public class Virus : Agent
         Velocity = new Vector2(Random.Range(-velRange, velRange) * 10, Random.Range(-velRange, velRange) * 10);
 
         // This virus is BCell movable
-        gameObject.AddComponent<BCellMovable>();
+        //gameObject.AddComponent<BCellMovable>();
 
         transform.localScale = new Vector3(Constants.WORLD_SCALE, Constants.WORLD_SCALE, Constants.WORLD_SCALE) * 0.1f * 5;
     }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BCell : Agent
 {
-    public float speed = 5;
+    public float speed = 4;
     // Reference to the Prefab. Drag a Prefab into this field in the Inspector.
     public GameObject projectile;
     public float launchVelocity = 700f;
