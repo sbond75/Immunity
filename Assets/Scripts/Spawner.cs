@@ -29,6 +29,7 @@ public class Spawner : MonoBehaviour
     {
         while (true)
         {
+
             yield return new WaitForSeconds(Random.Range(2, 3));
             
             randomIndex = Random.Range(0, cellReferences.Length);
@@ -37,9 +38,12 @@ public class Spawner : MonoBehaviour
             spawnedCell = Instantiate(cellReferences[randomIndex]);
             spawnedCell.transform.position = spawnerRefenrences[randomSide].position;
 
-            print(spawnedCell.GetComponent<Virus>());
 
-            if (spawnedCell.GetComponent<Virus>() != null)
+            //vaccine and about to generate virus, stop
+            if (VaccineMode.vaccine && spawnedCell.GetComponent<Virus>() != null && Random.Range(0, 2) < 0.5)
+            {
+                continue;
+            } else
             {
                 if (randomIndex < 3)
                 {
@@ -49,7 +53,7 @@ public class Spawner : MonoBehaviour
                 else
                 {
                     spawnedCell.GetComponent<Agent>().velocity = new Vector2(Random.Range(10, 20), Random.Range(10, 20));
-                    spawnedCell.transform.localScale = new Vector3(1f, -1f, 1f);
+                    //spawnedCell.transform.localScale = new Vector3(1f, -1f, 1f);
                 }
             }
         }
