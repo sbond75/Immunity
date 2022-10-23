@@ -19,6 +19,9 @@ public class Virus : Agent
 
         // Give initial random velocity
         Velocity = new Vector2(Random.Range(-velRange, velRange) * 10, Random.Range(-velRange, velRange) * 10);
+
+        // This virus is BCell movable
+        gameObject.AddComponent<BCellMovable>();
     }
 
     public GameObject attached;

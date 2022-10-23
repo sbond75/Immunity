@@ -55,6 +55,9 @@ public class TissueCell : Agent
 
             if (Health < -0.05f) // Let the production warm up after infection basically
             {
+                // This TissueCell is BCell movable
+                gameObject.AddComponent<BCellMovable>();
+
                 // Disable existing virus
                 dnaInjection.gameObject.SetActive(false);
 

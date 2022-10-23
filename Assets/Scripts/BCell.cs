@@ -10,6 +10,7 @@ public class BCell : Agent
     public float launchVelocity = 700f;
     private float fireTime = 0.5f; //seconds
     private float timeSinceFire = 0f;
+    public GameObject Carrying;
 
     // Start is called before the first frame update
     void Start()
