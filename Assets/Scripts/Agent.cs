@@ -78,7 +78,7 @@ public class Agent : MonoBehaviour
         transform.position = position;
 
         float lowerLim = 150;
-        float slow = 0.95f;
+        float slow = 0.6f;
         if (transform.position.y < lowerLim)
         {
             transform.position = new Vector2(transform.position.x, lowerLim);
