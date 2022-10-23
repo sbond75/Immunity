@@ -9,10 +9,13 @@ TagManager:
   - Virus
   - Phagocyte
   - Wall
+<<<<<<< HEAD
   - Antibody
   - BCell
   - HelperT
+=======
   - TCell
+>>>>>>> b205b58294b6a6d91f3be7dd36e869d345c59733
   layers:
   - Default
   - TransparentFX

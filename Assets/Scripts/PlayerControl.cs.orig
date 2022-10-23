@@ -26,7 +26,8 @@ public class PlayerControl : MonoBehaviour
     // Update is called once per frame
     protected void Update()
     {
-        MoveKeyBoard();
+<<<<<<< HEAD
+        PhagocyteMoveKeyBoard();
 
         fire = Input.GetButtonDown("Fire1");
         if (fire)
@@ -35,6 +36,9 @@ public class PlayerControl : MonoBehaviour
             shootDirection.z = 0.0f;
             shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
         }
+=======
+        MoveKeyBoard();
+>>>>>>> b205b58294b6a6d91f3be7dd36e869d345c59733
     }
     
     void MoveKeyBoard()
