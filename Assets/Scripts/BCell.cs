@@ -35,15 +35,15 @@ public class BCell : Agent
     {
         base.Update();
         timeSinceFire += Time.deltaTime;
-        if (Input.GetButtonDown("Fire1") && timeSinceFire > fireTime)
+        var p = GetComponent<PlayerControl>();
+        if (p.Fire && timeSinceFire > fireTime)
         {
             print("fire");
             timeSinceFire = 0;
 
             // https://answers.unity.com/questions/604198/shooting-in-direction-of-mouse-cursor-2d.html
             //...setting shoot direction
-            Vector3 shootDirection;
-            shootDirection = Input.mousePosition;
+            var shootDirection = p.ShootDirection;
             shootDirection.z = 0.0f;
             shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
             shootDirection = shootDirection - transform.position;
@@ -56,9 +56,24 @@ public class BCell : Agent
             GameObject closest = GetClosestInstance(objects);
             if (closest != null)
             {
-                if (Vector3.Distance(closest.transform.position, transform.position) < 100)
+                if (Vector3.Distance(closest.transform.position, transform.position) < 10 * Constants.WORLD_SCALE)
                 {
-                    bulletInstance.GetComponent<Antibody>().effectiveAgainst = objects;
+                    GameObject[] virusesNearHelperT_ = GameObject.FindGameObjectsWithTag(Constants.VIRUS_TAG);
+                    var currentPos = closest.transform.position;
+                    var maxDist = 20 * Constants.WORLD_SCALE;
+                    IList<GameObject> virusesNearHelperT = new List<GameObject>();
+                    foreach (GameObject t in virusesNearHelperT)
+                    {
+                        float dist = Vector3.Distance(t.transform.position, currentPos);
+                        if (dist < maxDist)
+                        {
+                            virusesNearHelperT.Add(t);
+                        }
+                    }
+
+                    GameObject[] array = new GameObject[virusesNearHelperT.Count];
+                    virusesNearHelperT.CopyTo(array, 0);
+                    bulletInstance.GetComponent<Antibody>().effectiveAgainst = array;
                 }
             }
 

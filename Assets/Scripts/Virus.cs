@@ -12,7 +12,7 @@ public class Virus : Agent
 
     public Vector3 randomVelocity()
     {
-        return new Vector2(Random.Range(-velRange, velRange) * 10, Random.Range(-velRange, velRange) * 10);
+        return new Vector2(Random.Range(-velRange, velRange) * 10, Random.Range(-velRange, velRange) * 10) * 0.2f;
     }
 
     // Start is called before the first frame update

@@ -49,6 +49,7 @@ public class AIControl : PlayerControl
                 if (closest != null)
                 {
                     shootDirection = closest.transform.position;
+                    fire = true;
                 }
             }
             return;
