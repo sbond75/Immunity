@@ -117,6 +117,6 @@ MonoBehaviour:
   maxHealth: 100
   velocity: {x: 0, y: 0}
   mass: 4
-  speed: 5
+  speed: 400
   projectile: {fileID: 7947755401510849589, guid: 10d101ea91c91443b8de6ab4a5d12c32, type: 3}
   launchVelocity: 700

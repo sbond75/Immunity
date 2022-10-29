@@ -24,7 +24,10 @@ public class Virus : Agent
 
         // Give initial random velocity
         velRange = velRange * Constants.WORLD_SCALE;
-        Velocity = randomVelocity();
+        if (Velocity == Vector2.zero)
+        {
+            Velocity = randomVelocity();
+        }
 
         // This virus is BCell movable
         //gameObject.AddComponent<BCellMovable>();
@@ -42,7 +45,7 @@ public class Virus : Agent
         {
             // Stay nearby
             Vector3 betweenUs = transform.position - GotIn.transform.position; // Vector pointing at us. move in (opposite) by some amount
-            transform.position -= betweenUs / 2 * Time.deltaTime;
+            transform.position -= betweenUs / 200 * Time.deltaTime;
         }
     }
 
@@ -63,7 +66,7 @@ public class Virus : Agent
             {
                 // Stay nearby
                 betweenUs = transform.position - attached.transform.position; // Vector pointing at us. move in (opposite) by some amount
-                transform.position -= betweenUs * Time.deltaTime;
+                transform.position -= betweenUs / 200 * Time.deltaTime;
             }
         }
 

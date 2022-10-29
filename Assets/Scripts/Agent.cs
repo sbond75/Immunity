@@ -154,4 +154,11 @@ public class Agent : MonoBehaviour
         }
         return tMin;
     }
+
+    public void MoveTowards(Vector3 target, float acceleration)
+    {
+        Vector2 to = new Vector2(target.x, target.y) - new Vector2(transform.position.x, transform.position.y);
+        to.Normalize();
+        Velocity += acceleration * to;
+    }
 }

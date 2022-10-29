@@ -19,15 +19,12 @@ public class KillerT : Agent
         base.Update();
         findInfectedBCells();
         //check arrow's reference
-        if (target == null)
-        {
-            arrow.setTarget(null);
-        }
+        arrow.setTarget(target);
     }
 
     void findInfectedBCells()
     {
-        GameObject[] BCellsToCheck = GameObject.FindGameObjectsWithTag("BCell");
+        GameObject[] BCellsToCheck = GameObject.FindGameObjectsWithTag(Constants.BCELL_TAG);
         
         List<GameObject> BCellsWithInfected = new List<GameObject>();
         foreach (GameObject Bcell in BCellsToCheck)

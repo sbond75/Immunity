@@ -51,7 +51,8 @@ public class TissueCell : Agent
             Damage(healthDec);
 
             // Color tint
-            gameObject.GetComponent<SpriteRenderer>().color = new Color(1 * -(Health / 10), 1 * -(Health / 10), 1 * -(Health / 10), 1);
+            var tint = (-13 / Health) * 0.13f;
+            gameObject.GetComponent<SpriteRenderer>().color = new Color(tint, tint, tint, 1);
 
             if (Health < -0.05f) // Let the production warm up after infection basically
             {
@@ -68,7 +69,7 @@ public class TissueCell : Agent
                 virus2_.creator = gameObject;
                 virus2_.attached = null;
                 virus2_.GotIn = null;
-                //virus2_.Velocity = virus2_.randomVelocity();
+                virus2_.Velocity = virus2_.randomVelocity();
                 virus2.SetActive(true);
 
                 // Sound

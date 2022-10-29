@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class BCell : Agent
 {
-    public float speed = 4;
+    public float speed;
     // Reference to the Prefab. Drag a Prefab into this field in the Inspector.
     public GameObject projectile;
     public float launchVelocity = 700f;
@@ -47,8 +47,10 @@ public class BCell : Agent
             shootDirection.z = 0.0f;
             shootDirection = Camera.main.ScreenToWorldPoint(shootDirection);
             shootDirection = shootDirection - transform.position;
+            shootDirection.Normalize();
             //...instantiating the rocket
-            GameObject bulletInstance = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(0, 0, 0)));
+            var ea = Quaternion.FromToRotation(transform.position, shootDirection).eulerAngles;
+            GameObject bulletInstance = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(ea.x + Random.Range(-30,30), ea.y + Random.Range(-30, 30), ea.z)));
             bulletInstance.GetComponent<Antibody>().creator = this;
 
             // Inhibit with a chance, increase chance if creator has a helper t nearby
@@ -56,7 +58,7 @@ public class BCell : Agent
             GameObject closest = GetClosestInstance(objects);
             if (closest != null)
             {
-                if (Vector3.Distance(closest.transform.position, transform.position) < 10 * Constants.WORLD_SCALE)
+                if (Vector3.Distance(closest.transform.position, transform.position) < 50 * Constants.WORLD_SCALE)
                 {
                     GameObject[] virusesNearHelperT_ = GameObject.FindGameObjectsWithTag(Constants.VIRUS_TAG);
                     var currentPos = closest.transform.position;
