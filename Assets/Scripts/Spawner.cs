@@ -16,7 +16,10 @@ public class Spawner : MonoBehaviour
 
     private int randomIndex;
     private int randomSide;
-    bool fastSpawn = true;
+    [SerializeField]
+    bool fastSpawn;
+    [SerializeField]
+    bool veryFastSpawn;
     // Start is called before the first frame update
     void Start()
     {
@@ -40,7 +43,14 @@ public class Spawner : MonoBehaviour
             }
             else
             {
-                yield return new WaitForSeconds(Random.Range(0.4f, 0.5f) + (float)Math.Sin(elapsed / 10));
+                if (veryFastSpawn)
+                {
+                    yield return new WaitForSeconds(Random.Range(0.1f, 0.2f) + (float)Math.Sin(elapsed / 10));
+                }
+                else
+                {
+                    yield return new WaitForSeconds(Random.Range(0.4f, 0.5f) + (float)Math.Sin(elapsed / 10));
+                }
             }
             
             randomIndex = Random.Range(0, cellReferences.Length);

@@ -22,12 +22,16 @@ public class BCell : Agent
             carrying = value;
         }
     }
+    AudioSource shoot;
 
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
         tag = Constants.BCELL_TAG;
+
+        shoot = gameObject.AddComponent<AudioSource>();
+        shoot.clip = AudioManager.GetClip("Sounds/antibodyShootTiny");
     }
 
     // Update is called once per frame
@@ -51,6 +55,7 @@ public class BCell : Agent
             //...instantiating the rocket
             var ea = Quaternion.FromToRotation(transform.position, shootDirection).eulerAngles;
             GameObject bulletInstance = Instantiate(projectile, transform.position, Quaternion.Euler(new Vector3(ea.x + Random.Range(-30,30), ea.y + Random.Range(-30, 30), ea.z)));
+            shoot.PlayOneShot(shoot.clip);
             bulletInstance.GetComponent<Antibody>().creator = this;
 
             // Inhibit with a chance, increase chance if creator has a helper t nearby
@@ -64,7 +69,7 @@ public class BCell : Agent
                     var currentPos = closest.transform.position;
                     var maxDist = 20 * Constants.WORLD_SCALE;
                     IList<GameObject> virusesNearHelperT = new List<GameObject>();
-                    foreach (GameObject t in virusesNearHelperT)
+                    foreach (GameObject t in virusesNearHelperT_)
                     {
                         float dist = Vector3.Distance(t.transform.position, currentPos);
                         if (dist < maxDist)

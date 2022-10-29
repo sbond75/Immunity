@@ -7,11 +7,13 @@ public class BCellMovable : MonoBehaviour
     // The BCell we're attached to
     public GameObject attached = null;
     Vector3 orig;
+    AudioSource pickup;
 
     // Use this for initialization
     void Start()
     {
-
+        pickup = gameObject.AddComponent<AudioSource>();
+        pickup.clip = AudioManager.GetClip("Sounds/bcellPickup");
     }
 
     // Update is called once per frame
@@ -31,6 +33,7 @@ public class BCellMovable : MonoBehaviour
                 attached = collision.gameObject;
                 orig = transform.position - attached.transform.position;
                 attached.GetComponent<BCell>().Carrying = gameObject;
+                pickup.PlayOneShot(pickup.clip);
 
                 // Slow down the BCell if it is attached tissue cell
                 if (attached.CompareTag(Constants.TISSUE_CELL_TAG))

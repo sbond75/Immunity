@@ -6,11 +6,16 @@ public class KillerT : Agent
 {
     public BCell target;
     public Arrow arrow;
+    AudioSource kill;
+
     // Start is called before the first frame update
     void Start()
     {
         base.Start();
         tag = Constants.KILLER_T_TAG;
+
+        kill = gameObject.AddComponent<AudioSource>();
+        kill.clip = AudioManager.GetClip("Sounds/zap");
     }
 
     // Update is called once per frame
@@ -67,7 +72,9 @@ public class KillerT : Agent
         if (collision.gameObject == target.Carrying)
         {
             //accelerating death but not destroying the object
-            target.Carrying.GetComponent<TissueCell>().healthDec *= 10;
+            var tc = target.Carrying.GetComponent<TissueCell>();
+            tc.healthDec *= 10;
+            tc.die = kill;
         }
     }
 }

@@ -7,6 +7,7 @@ public class Agent : MonoBehaviour
     public float maxHealth = 100;
     public Vector2 velocity = Vector2.zero;
     public float mass = 4;
+    AudioSource collide;
 
     public float Health
     {
@@ -55,12 +56,21 @@ public class Agent : MonoBehaviour
             {
                 m.CurrentPlayer = gameObject;
                 gameObject.AddComponent<PlayerControl>();
+                // Make highlight
+                //var l = gameObject.AddComponent<LineRenderer>();
+                //l.widthMultiplier = 3;
+                //var h = gameObject.AddComponent<Highlight>();
+                //h.xradius = 2;
+                //h.yradius = 2;
             }
             else
             {
                 gameObject.AddComponent<AIControl>();
             }
         }
+
+        collide = gameObject.AddComponent<AudioSource>();
+        collide.clip = AudioManager.GetClip("Sounds/collide");
     }
 
     // Whether this is playable by the player
@@ -83,29 +93,34 @@ public class Agent : MonoBehaviour
         {
             transform.position = new Vector2(transform.position.x, lowerLim);
             velocity.y = Mathf.Abs(velocity.y) * slow;
+            collide.Play();
         }
         float upperLim = 1080 - lowerLim;
         if (transform.position.y > upperLim)
         {
             transform.position = new Vector2(transform.position.x, upperLim);
             velocity.y = -Mathf.Abs(velocity.y) * slow;
+            collide.Play();
         }
         float leftLim = transform.localScale.x;
         if (transform.position.x < leftLim)
         {
             transform.position = new Vector2(leftLim, transform.position.y);
             velocity.x = Mathf.Abs(velocity.x) * slow;
+            collide.Play();
         }
         float rightLim = 1920 - leftLim;
         if (transform.position.x > rightLim)
         {
             transform.position = new Vector2(rightLim, transform.position.y);
             velocity.x = -Mathf.Abs(velocity.x) * slow;
+            collide.Play();
         }
     }
 
     protected void OnTriggerEnter2D(UnityEngine.Collider2D collision)
     {
+        //collide.Play();
     }
 
     protected void OnTriggerStay2D(Collider2D collision)

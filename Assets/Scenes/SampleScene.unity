@@ -1351,7 +1351,7 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 55e04cb171c464deabc10b2f0e8f9295, type: 3}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 1
@@ -2789,6 +2789,8 @@ MonoBehaviour:
   - {fileID: 2012783212}
   - {fileID: 1273036457}
   - {fileID: 372918235}
+  fastSpawn: 1
+  veryFastSpawn: 0
 --- !u!212 &1265911927
 SpriteRenderer:
   m_ObjectHideFlags: 0

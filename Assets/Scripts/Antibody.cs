@@ -11,6 +11,7 @@ public class Antibody : Agent
     public float velRange = 10.1f;
     private float timeLastInhibit = 10.0f;
     float elapsed = 0;
+    AudioSource attachSound;
 
     // Start is called before the first frame update
     void Start()
@@ -18,6 +19,9 @@ public class Antibody : Agent
         base.Start();
         tag = Constants.ANTIBODY_TAG;
         transform.localScale = new Vector3(Constants.WORLD_SCALE, Constants.WORLD_SCALE, Constants.WORLD_SCALE) * 0.3f;
+
+        attachSound = gameObject.AddComponent<AudioSource>();
+        attachSound.clip = AudioManager.GetClip("Sounds/garble");
     }
 
     // Update is called once per frame
@@ -66,6 +70,7 @@ public class Antibody : Agent
         attached = other;
         // Save position relative to the attached
         attachedRelTo = attached.transform.position - transform.position;
+        attachSound.PlayOneShot(attachSound.clip);
     }
 
     private void OnTriggerEnter2D(Collider2D collision)

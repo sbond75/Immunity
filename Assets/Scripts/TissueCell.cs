@@ -11,6 +11,9 @@ public class TissueCell : Agent
     public float healthDec = 0.5f; // When infected
     float spawnCount = 5; // viruses to spawn
     float spawnCountVariation = 3; // plus or minus the above
+    AudioSource infect;
+    public AudioSource die;
+    AudioSource spawn;
 
     public bool Infected
     {
@@ -26,6 +29,13 @@ public class TissueCell : Agent
         base.Start();
         mass = 20;
         tag = Constants.TISSUE_CELL_TAG;
+
+        infect = gameObject.AddComponent<AudioSource>();
+        infect.clip = AudioManager.GetClip("Sounds/tissueCellDie");
+        die = gameObject.AddComponent<AudioSource>();
+        die.clip = AudioManager.GetClip("Sounds/muffledExplode");
+        spawn = gameObject.AddComponent<AudioSource>();
+        spawn.clip = AudioManager.GetClip("Sounds/Enemy_spawn_green");
     }
 
     // Update is called once per frame
@@ -43,6 +53,7 @@ public class TissueCell : Agent
             if (Health < -spawnCount / healthDec + Random.Range(-spawnCountVariation, spawnCountVariation))
             {
                 // go away
+                die.PlayOneShot(die.clip);
                 Destroy(gameObject);
                 yield return null;
             }
@@ -73,7 +84,7 @@ public class TissueCell : Agent
                 virus2.SetActive(true);
 
                 // Sound
-                //GetComponent<AudioSource>().Play();
+                spawn.PlayOneShot(spawn.clip);
             }
             yield return new WaitForSeconds(spawnVirusWaitingTime + Random.Range(-spawnVirusRandomization, spawnVirusRandomization));
             //yield return null;
@@ -103,6 +114,8 @@ public class TissueCell : Agent
                 dnaInjection = virus;
                 // Start timer
                 StartCoroutine(VirusSpawn());
+
+                infect.PlayOneShot(infect.clip);
             }
         }
 
